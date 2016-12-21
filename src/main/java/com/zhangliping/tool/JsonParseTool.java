@@ -1,4 +1,4 @@
-package com.zhangliping.json;
+package com.zhangliping.tool;
 
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import com.zhangliping.baseUtil.JsonUtil;
 import com.zhangliping.baseUtil.ResponseVo;
-import com.zhangliping.bean.Result;
+import com.zhangliping.sqladmin.bean.SqlAdminResult;
 
 /***
  * 本类用来加载远程接口的不同返回结果，结果配置在META-INFO/jsons/下的文件中
@@ -19,7 +19,7 @@ import com.zhangliping.bean.Result;
  * @author yuguangying
  *
  */
-public class LoadFileUtils {
+public class JsonParseTool {
 
     //缓存文件中不同的json
     private static Map<String, String> JSON_CACHE_MAP = new HashMap<String, String>();
@@ -100,7 +100,7 @@ public class LoadFileUtils {
         
         //当前线程ClassLoader不存在
         if (loader == null) {
-            loader = LoadFileUtils.class.getClassLoader();
+            loader = JsonParseTool.class.getClassLoader();
             //ClassLoader为BootStrap ClassLoader
             if (loader == null) {
                 try {
@@ -119,7 +119,7 @@ public class LoadFileUtils {
         
         
         ResponseVo responseVo=JsonUtil.toBean(json, ResponseVo.class);
-        Result result=JsonUtil.toBean(responseVo.getData(), Result.class);
+        SqlAdminResult result=JsonUtil.toBean(responseVo.getData(), SqlAdminResult.class);
         
         System.out.println(result);
     }
