@@ -1,0 +1,337 @@
+{
+  "success": true,
+  "msg": null,
+  "errorCode": 1010000,
+  "data": {
+    "count": 1,
+    "rows": [
+      {
+        "resourceId": 1600010603,
+        "ownerId": 0,
+        "ownerName": null,
+        "managerId": 2315,
+        "managerName": "吴焕红",
+        "resName": "[元宵]&lt;sit多行程非默认费用不勾选游&gt;测试",
+        "resType": 27,
+        "subResType": 1,
+        "continentCode": 3600,
+        "continentName": "欧洲",
+        "countryCode": 3645,
+        "countryName": "意大利",
+        "provinceCode": 784528,
+        "provinceName": "西西里",
+        "cityCode": 784534,
+        "cityName": "皮亚扎阿尔梅里纳",
+        "districtCode": null,
+        "districtName": "",
+        "operateAttention": "sit多行程非默认费用不勾选",
+        "state": 1,
+        "custRemarks": "",
+        "resShare": 1,
+        "prdShare": 1,
+        "isEdit2NB": 0,
+        "isAbroad": 1,
+        "schemeList": [
+          {
+            "resId": 1600010603,
+            "resCode": "RTR1600010603",
+            "resName": "[元宵]&lt;sit多行程非默认费用不勾选游&gt;测试",
+            "schemeName": "基础方案",
+            "liveFlag": 0,
+            "mealFlag": 0,
+            "trafficFlag": 0,
+            "activityFlag": 0,
+            "otherFlag": 0,
+            "remark": "",
+            "isDefault": 1,
+            "additionalResId": 1600010604,
+            "additionalResCode": "RSF1600010604",
+            "notAccChildrenFlag": null
+          }
+        ],
+        "schedule": [
+          {
+            "trafficGo": 1,
+            "trafficBack": 1,
+            "dayNum": 2,
+            "nightNum": 1,
+            "startTime": "04:00:00",
+            "endTime": "15:00:00",
+            "scheduleContent": "<div class=\"tourSection_niuren\"><div class=\"tourContent_new\"><div class=\"day_title_new\"><h3><em>第1天</em><div><img src=\"http://img.tuniucdn.com/icons/route/plain.gif\">南京</div></h3><div class=\"tour_line\">测试</div></div><div class=\"time_box_inner clearfix\"><div class=\"time_num\"><div class=\"tour_con\"></div></div><div class=\"time_do_new\"><div class=\"tour_description\"></div><div class=\"tour_con_h4\">测试</div></div></div><div class=\"time_box_inner clearfix\"><div class=\"time_num\"><div class=\"tour_con\"></div></div><div class=\"time_do_new\"><div class=\"tour_description\"></div></div></div></div><div class=\"tourContent_new\"><div class=\"day_title_new\"><h3><em>第2天</em><div>请在这里输入行程标题</div></h3><div class=\"tour_line\">测试</div></div></div></div>",
+            "scheduleRemark": "<p>sit多行程非默认费用不勾选</p>",
+            "isDefault": 1,
+            "departureCity": {
+              "continentName": "亚洲",
+              "continentCode": 3900,
+              "countryName": "中国",
+              "countryCode": 40002,
+              "provinceName": "江苏",
+              "provinceCode": 1600,
+              "cityName": "南京",
+              "cityCode": 1602
+            },
+            "destinationCity": {
+              "continentName": "亚洲",
+              "continentCode": 3900,
+              "countryName": "中国",
+              "countryCode": 40002,
+              "provinceName": "江苏",
+              "provinceCode": 1600,
+              "cityName": "南京",
+              "cityCode": 1602
+            }
+          }
+        ],
+        "activityRecommend": {
+          "note": null,
+          "activityList": null,
+          "shopRecommend": []
+        },
+        "attentionJsonInfo": {
+          "trafficInfo": null,
+          "accInfos": null,
+          "mealInfo": null,
+          "playInfo": null,
+          "buyInfo": null,
+          "diffPrice": null,
+          "adviseInfo": null,
+          "suggestionInfo": null,
+          "arrangements": [],
+          "orderAttentions": [
+            ""
+          ],
+          "warmAttention": "",
+          "specialTerms": [],
+          "abroadNotice": [
+            "团队报价按2人入住1间房核算，如出现单男单女，则尽量安排与其他同性别团友拼房或加床；若客人无需安排或旅行社无法安排，请补齐单房差以享用单人房间。<br>团队机票一经开出，不得更改，不得签转，不得退票；另飞行时间、车程时间、船程时间以当日实际所用时间为准。<br>如遇国家或航空公司政策性调整机票、燃油税价格，按调整后的实际价格结算。<br>当地购物时请慎重考虑，把握好质量与价格，请务必保存好所有的购物票据，若购物点提供发票，请索要。<br>是否给予签证或签注、是否准予出入境，是使领馆及有关部门的权力，如因游客自身原因或因提供材料存在问题不能及时办理签证或签注，以及被有关部门拒发签证或签注，不准出入境而影响行程的，签证费及其他费用损失由游客自行承担。<br>为了不耽误您的行程，请您在国际航班起飞前180分钟到达机场办理登机以及出入境相关手续；如涉及海外国内段行程，请您在航班起飞前60分钟到达机场办理登机手续。<br>出团通知最晚于出团前1个工作日发送，若能提前确定，我们将会第一时间通知您。"
+          ],
+          "manualAttention": null
+        },
+        "budgetIncludeJsonInfo": {
+          "isAbroad": 1,
+          "trafficInfo": "",
+          "innerTrafficInfo": "",
+          "liveInfo": "",
+          "mealInfo": "",
+          "ticketInfo": "",
+          "guideInfo": "",
+          "childStdInfo": "",
+          "tipInfo": null,
+          "presentInfo": "",
+          "otherInfo": "",
+          "visaInfo": "",
+          "guideFees": ""
+        },
+        "budgetExcludeJsonInfo": {
+          "innerTrafficInfo": [],
+          "airTaxInfo": null,
+          "roomDiffInfo": null,
+          "ticketInfo": "",
+          "otherInfo": "",
+          "additionInfo": null,
+          "travelAccidentInsuranceInfo": null,
+          "visaInfo": [],
+          "flightTaxInfo": [],
+          "guideFees": null
+        },
+        "budgetIncludeDetail": {
+          "otherInfo": "",
+          "presentInfo": ""
+        },
+        "budgetExcludeDetail": {
+          "noOther": "",
+          "smallTra": {
+            "smallCheck": "0",
+            "smallInputval": "",
+            "smallCheckval": ""
+          },
+          "noTicket": "0",
+          "noInsurance": "0",
+          "noAddition": [],
+          "noTicketval": "",
+          "noRoomval": "",
+          "noRoom": "0"
+        },
+        "recommend": [
+          {
+            "proType": "1",
+            "sort": 1,
+            "description": ""
+          },
+          {
+            "proType": "2",
+            "sort": 2,
+            "description": ""
+          },
+          {
+            "proType": "3",
+            "sort": 3,
+            "description": ""
+          },
+          {
+            "proType": "4",
+            "sort": 4,
+            "description": ""
+          },
+          {
+            "proType": "5",
+            "sort": 5,
+            "description": ""
+          },
+          {
+            "proType": "6",
+            "sort": 6,
+            "description": ""
+          },
+          {
+            "proType": "7",
+            "sort": 7,
+            "description": ""
+          },
+          {
+            "proType": "15",
+            "sort": 8,
+            "description": {
+              "isApp": 0,
+              "modules": [
+                {
+                  "content": "sit多行程非默认费用不勾选",
+                  "title": "sit多行程非默认费用不勾选",
+                  "imgs": ""
+                }
+              ]
+            }
+          },
+          {
+            "proType": "9",
+            "sort": 10,
+            "description": ""
+          },
+          {
+            "proType": "10",
+            "sort": 11,
+            "description": ""
+          },
+          {
+            "proType": "11",
+            "sort": 12,
+            "description": ""
+          },
+          {
+            "proType": "12",
+            "sort": 0,
+            "description": "sit多行程非默认费用不勾选<br/>sit多行程非默认费用不勾选<br/>"
+          }
+        ],
+        "importantInfo": {
+          "teamType": "0",
+          "independentTeam": "0",
+          "isJoinGroup": 0,
+          "remark": {
+            "isRemark00": null,
+            "remarkStr00": null,
+            "remarkIpt00": null,
+            "isRemark01": null,
+            "remarkStr01": null,
+            "remarkIpt01": null,
+            "isRemark02": null,
+            "remarkStr02": null,
+            "remarkIpt02": null,
+            "isRemark03": null,
+            "remarkStr03": null,
+            "remarkIpt03": null
+          },
+          "joinGroupInfo": {
+            "joinCount": "",
+            "scheduleDesc": "",
+            "joinType": 0
+          }
+        },
+        "departInfo": {
+          "departTitle": "发车信息",
+          "emergencyContactInfo": "测试；13770949616",
+          "autoSendNoticeFlag": "0",
+          "pickUpFlag": "0",
+          "pickUpType": "1",
+          "pickUpTraffic": "",
+          "departNotes": null,
+          "departList": [
+            {
+              "startPos": "南京",
+              "startTime": "08:00:00",
+              "returnPos": "南京",
+              "remark": "测试"
+            }
+          ],
+          "contactList": [
+            {
+              "type": 1,
+              "name": "途牛出游中客服",
+              "phone": "4007999999",
+              "remark": ""
+            },
+            {
+              "type": 6,
+              "name": "测试",
+              "phone": "",
+              "remark": "我社导游会提前与您进行联系，请保证电话的畅通"
+            },
+            {
+              "type": 3,
+              "name": "测试",
+              "phone": "",
+              "remark": ""
+            }
+          ],
+          "routeInfoRemark": ""
+        },
+        "specialPeople": {
+          "specialPrivilege": [],
+          "specialExtraCharge": [],
+          "areaLimit": [],
+          "peopleLimit": {
+            "peopleMinCheck": null,
+            "minLimit": null,
+            "peopleMaxCheck": null,
+            "numLimit": null,
+            "peopleAgeMaxCheck": null,
+            "beyondAge": null,
+            "peopleAgeMinCheck": null,
+            "underAge": null,
+            "peopleAgeDealCheck": null,
+            "healthAge": null,
+            "peopleAgeLimitCheck": null,
+            "peopleAgeLimitLow": null,
+            "peopleAgeLimitHigh": null,
+            "peopleForeignCheck": null,
+            "peopleAreaCheck": 0,
+            "foreignerLimit": null
+          }
+        },
+        "scheduleDetailInfos": [
+          {
+            "supportTransport": "0",
+            "airCode": "0",
+            "airName": "",
+            "scheduleRemark": "<p>sit多行程非默认费用不勾选</p>",
+            "scheduleContent": "<div class=\"tourSection_niuren\"><div class=\"tourContent_new\"><div class=\"day_title_new\"><h3><em>第1天</em><div><img src=\"http://img.tuniucdn.com/icons/route/plain.gif\">南京</div></h3><div class=\"tour_line\">测试</div></div><div class=\"time_box_inner clearfix\"><div class=\"time_num\"><div class=\"tour_con\"></div></div><div class=\"time_do_new\"><div class=\"tour_description\"></div><div class=\"tour_con_h4\">测试</div></div></div><div class=\"time_box_inner clearfix\"><div class=\"time_num\"><div class=\"tour_con\"></div></div><div class=\"time_do_new\"><div class=\"tour_description\"></div></div></div></div><div class=\"tourContent_new\"><div class=\"day_title_new\"><h3><em>第2天</em><div>请在这里输入行程标题</div></h3><div class=\"tour_line\">测试</div></div></div></div>",
+            "descTnSchHtml": "<div class=\"m_trip_info m_trip_detail mt10 J_trip_detail\"> <h4><span class=\"line\"></span>行程明细</h4> <div class=\"detail_content\">  </div> </div>",
+            "isNewJson": "3",
+            "trafficGo": "1",
+            "trafficBack": "1",
+            "scheduleFile": {
+              "imgPath": "",
+              "fileName": "",
+              "filePath": ""
+            },
+            "newJourneyDescByJson": {
+              "schDays": null
+            },
+            "journeyEditId": 3378
+          }
+        ]
+      }
+    ]
+  },
+  "productId": 0
+}
