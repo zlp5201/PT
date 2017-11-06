@@ -19,7 +19,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhangliping.sqladmin.bean.SqlAdminResult;
-import com.zhangliping.sqladmin.util.ExeclUtil;
+import com.zhangliping.sqladmin.util.ExcelUtil;
 import com.zhangliping.sqladmin.util.LocalRestUtil;
 
 /**
@@ -183,7 +183,7 @@ public class PreOrderBusiness {
 		data.put("listData", resultList);
 		data.put("header", header);
 		
-		ExeclUtil.objListToExcel(fileName, data, sheetMaxCount, orderStatusInt);
+		ExcelUtil.objListToExcel(fileName, data, sheetMaxCount, orderStatusInt);
 	}
 }
 

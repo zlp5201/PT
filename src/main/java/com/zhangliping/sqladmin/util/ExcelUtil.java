@@ -24,7 +24,7 @@ import com.zhangliping.sqladmin.bean.SqlAdminResult;
  * @author zhangliping
  *
  */
-public class ExeclUtil {
+public class ExcelUtil {
 	/**
 	 * 
 	 * @param name Excel保存的主题名
