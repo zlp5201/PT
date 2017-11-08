@@ -14,6 +14,7 @@ import com.github.crab2died.utils.DateUtils;
 public class ShellRunner {
 
     public static String path= "D:\\home\\";
+    public static String templeName= "temp.xlsx";
     public static String fileName= "个人放款通知单10.30.xlsx";
     public static Date loadDate= DateUtils.str2Date("2017-10-30", DateUtils.DATE_FORMAT_DAY);
     
@@ -104,6 +105,27 @@ public class ShellRunner {
 		// 生成线下回款
 		ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "线下回款", true, path + "线下回款.xlsx");
 		
-	}
+		
+		String tempPath = path + templeName;
+
+        List<ExcelLocal> excelLocalList = ExcelUtils.getInstance().readExcel2Objects(
+                tempPath, ExcelLocal.class,0,0);
+        
+        String name = "周开东";
+        
+        List<ExcelLocal> genLocalList = new ArrayList();
+        ExcelLocal genLocal = null;
+        for (ExcelLocal excelLocal : excelLocalList) {
+            if (name.equals(excelLocal.getBorrower())) {
+                genLocal = new ExcelLocal();
+                genLocal.setBorrower(name);
+                genLocal.setLocation(excelLocal.getLocation());
+                genLocalList.add(genLocal);
+            }
+        }
+        
+        // 线下放款生成
+        ExcelUtils.getInstance().exportObjects2Excel(genLocalList, ExcelLocal.class, true, "位置", true, "D:\\home\\位置.xlsx");
+    }
 
 }
