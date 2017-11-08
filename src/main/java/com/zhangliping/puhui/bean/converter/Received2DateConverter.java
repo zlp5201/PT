@@ -27,8 +27,6 @@ public class Received2DateConverter implements WriteConvertible {
         if (date == null) {
             return "";
         }
-        return DateUtils.date2Str(date, DateUtils.DATE_FORMAT_DAY);
+        return DateUtils.date2Str(date, "yyyy-M-d");
     }
-
-
 }

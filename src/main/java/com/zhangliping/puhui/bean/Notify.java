@@ -35,7 +35,7 @@ public class Notify {
     @ExcelField(title = "合同编号", order = 1)
     private String contractNo;
     @ExcelField(title = "借款金额", order = 1)
-    private String jiekuanjine;
+    private double jiekuanjine;
     @ExcelField(title = "借款期限", order = 1)
     private String jiekuanqixian;
     @ExcelField(title = "借款利率", order = 1)

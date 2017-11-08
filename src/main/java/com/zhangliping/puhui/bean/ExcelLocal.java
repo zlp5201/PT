@@ -11,7 +11,6 @@ import java.util.Date;
 import lombok.Data;
 
 import com.github.crab2died.annotation.ExcelField;
-import com.zhangliping.puhui.bean.converter.Received2DateConverter;
 
 /**
  * 〈一句话功能简述〉<br> 
