@@ -1,5 +1,7 @@
 package com.zhangliping.puhui.bean;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,13 +29,22 @@ public class ShellRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(ShellRunner.class);
 
-    public static String path = "D:\\home\\";
+    public static String path = "D:\\report\\puhui\\";
+    public static String destPath = path + "11.13\\";
     public static String templeName = "temp.xlsx";
-    public static String fileName = "个人放款通知单10.30.xlsx";
-    public static int position = 72;
+    public static String fileName = "个人放款通知单11.13.xlsx";
+    public static int position = 48;
     public static String pwName = "PW.xlsx";
-    public static Date loadDate = DateUtils.str2Date("2017-10-30", DateUtils.DATE_FORMAT_DAY);
+    public static Date loadDate = DateUtils.str2Date("2017-11-13", "yyyy-M-d");
 
+    static {
+    	File file = new File(destPath);
+    	if (!file.exists()) {
+			file.mkdirs();
+    	}
+    	
+    }
+    
     /**
      * @param args
      * @throws Exception
@@ -70,7 +81,7 @@ public class ShellRunner {
             loanList.add(loan);
         }
         // 线下放款生成
-        ExcelUtils.getInstance().exportObjects2Excel(loanList, Loan.class, true, "线下放款", true, path + "线下放款.xlsx");
+        ExcelUtils.getInstance().exportObjects2Excel(loanList, Loan.class, true, "线下放款", true, destPath + "线下放款.xlsx");
     }
 
     private static void receiveGen(List<Notify> notifyList) throws Exception {
@@ -130,7 +141,7 @@ public class ShellRunner {
         }
         // 生成线下回款
         ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "线下回款", true,
-                path + "线下回款.xlsx");
+        		destPath + "线下回款.xlsx");
     }
 
     private static void localGen() throws Exception {
@@ -154,10 +165,10 @@ public class ShellRunner {
                     }
                 }
             }
+            // 位置生成
+            ExcelUtils.getInstance()
+            .exportObjects2Excel(genLocalList, ExcelLocal.class, true, "位置", true, destPath + "位置.xlsx");
         }
-        // 位置生成
-        ExcelUtils.getInstance()
-                .exportObjects2Excel(genLocalList, ExcelLocal.class, true, "位置", true, path + "位置.xlsx");
     }
 
 }
