@@ -18,9 +18,23 @@ public class PropertiesUtils {
 	private static Properties prop = null;
 
 	static {
+//		tuniu
+//		prop = new Properties();
+//		InputStream config = PropertiesUtils.class
+//				.getResourceAsStream("/puhui.properties");
+//
+//		try {
+//			BufferedReader bf = new BufferedReader(new InputStreamReader(
+//					config, "utf-8"));
+//			prop.load(bf);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		
 		prop = new Properties();
 		InputStream config = PropertiesUtils.class
-				.getResourceAsStream("/config.properties");
+				.getResourceAsStream("/puhui.properties");
 
 		try {
 			BufferedReader bf = new BufferedReader(new InputStreamReader(

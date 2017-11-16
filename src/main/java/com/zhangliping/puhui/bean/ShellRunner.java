@@ -1,7 +1,6 @@
 package com.zhangliping.puhui.bean;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import com.github.crab2died.ExcelUtils;
 import com.github.crab2died.utils.DateUtils;
 import com.google.common.collect.Lists;
+import com.xiaoleilu.hutool.util.DateUtil;
+import com.zhangliping.sqladmin.util.PropertiesUtils;
 
 /**
  * 
@@ -29,20 +30,26 @@ public class ShellRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(ShellRunner.class);
 
-    public static String path = "D:\\report\\puhui\\";
-    public static String destPath = path + "11.13\\";
+    public static String date = PropertiesUtils.getValue("date");
+   ;
+    public static Integer rowNum = Integer.valueOf(PropertiesUtils.getValue("rowNum"));
+    public static String path = PropertiesUtils.getValue("path");
+    public static String dateStr = genDateStr(date);
+    
+    public static String destPath = path + date + "\\";
     public static String templeName = "temp.xlsx";
-    public static String fileName = "个人放款通知单11.13.xlsx";
-    public static int position = 48;
+    public static String fileName = "个人放款通知单"+ date + ".xlsx";
     public static String pwName = "PW.xlsx";
-    public static Date loadDate = DateUtils.str2Date("2017-11-13", "yyyy-M-d");
-
+    public static Date loadDate = DateUtils.str2Date(dateStr, "yyyy-M-d");
+    
     static {
+    
     	File file = new File(destPath);
     	if (!file.exists()) {
 			file.mkdirs();
     	}
     	
+    	 
     }
     
     /**
@@ -52,7 +59,7 @@ public class ShellRunner {
     public static void main(String[] args) throws Exception {
         String fileFullPath = path + fileName;
         logger.info("开始读取放贷记录....");
-        List<Notify> notifyList = ExcelUtils.getInstance().readExcel2Objects(fileFullPath, Notify.class, 3, position, 0);
+        List<Notify> notifyList = ExcelUtils.getInstance().readExcel2Objects(fileFullPath, Notify.class, 3, rowNum, 0);
 
         // 线下放款
         loadGen(notifyList);
@@ -61,7 +68,7 @@ public class ShellRunner {
         receiveGen(notifyList);
 
         // 文件记录查找
-        localGen();
+//        localGen();
         logger.info("完事....收工.....");
     }
 
@@ -81,7 +88,7 @@ public class ShellRunner {
             loanList.add(loan);
         }
         // 线下放款生成
-        ExcelUtils.getInstance().exportObjects2Excel(loanList, Loan.class, true, "线下放款", true, destPath + "线下放款.xlsx");
+        ExcelUtils.getInstance().exportObjects2Excel(loanList, Loan.class, true, "快捷通", true, destPath + "快捷通放款.xlsx");
     }
 
     private static void receiveGen(List<Notify> notifyList) throws Exception {
@@ -110,29 +117,50 @@ public class ShellRunner {
             received.setReturnDate(null);
             receivedList.add(received);
             Date calcDate = stu.getReturnStartDate();
+            
+            // 先计算第二条记录
+            
+            double fangkuan = Math.floor(Double.valueOf(stu.getTureTotal()) / 24.0);
+            double lixi = Math.floor(Double.valueOf(stu.getTotallixi()) / 24.0);
+            double service = Math.floor((tureTotal + serviceFee) / 24.0 - fangkuan);
+            
+            double total = 0.0;
             for (int i = 0; i < Integer.valueOf(stu.getJiekuanqixian()); i++) {
                 received = new Received();
                 received.setContractNo(stu.getContractNo());
                 received.setBorrower(stu.getBorrower());
                 // 放款日期", order = 1)
                 received.setReturnStartDate(null);
-                // "服务费", order = 1)
-                received.setServiceFee("");
-                // @ExcelField(title = "放款金额", order = 1)
-                received.setTureTotal("");
-                // @ExcelField(title = "应收利息", order = 1)
-                received.setTotallixi("");
-                // @ExcelField(title = "还款总额", order = 1)
-                received.setReturnTotal("");
-                // @ExcelField(title = "应还款日", order = 1)
-
+                
                 if (i == 0) {
+                    // "服务费", order = 1)
+                    received.setServiceFee(String.valueOf(serviceFee - service * 23));
+                    // @ExcelField(title = "放款金额", order = 1)
+                    received.setTureTotal(String.valueOf(tureTotal - fangkuan * 23));
+                    // @ExcelField(title = "应收利息", order = 1)
+                    received.setTotallixi(String.valueOf(totallixi - lixi * 23));
+                    // @ExcelField(title = "还款总额", order = 1)
+                    total = serviceFee - service * 23 + tureTotal - fangkuan * 23 + totallixi - lixi * 23;
+                    received.setReturnTotal(String.valueOf(total));
+                    // @ExcelField(title = "应还款日", order = 1)
                     received.setReturnDate(stu.getReturnStartDate());
                 } else {
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(calcDate);
                     calendar.add(calendar.MONTH, 1);
                     received.setReturnDate(calendar.getTime());
+                    
+
+                    // "服务费", order = 1)
+                    received.setServiceFee(String.valueOf(service));
+                    // @ExcelField(title = "放款金额", order = 1)
+                    received.setTureTotal(String.valueOf(fangkuan));
+                    // @ExcelField(title = "应收利息", order = 1)
+                    received.setTotallixi(String.valueOf(lixi));
+                    // @ExcelField(title = "还款总额", order = 1)
+                    total = total + service + fangkuan + lixi;
+                    received.setReturnTotal(String.valueOf(total));
+                    // @ExcelField(title = "应还款日", order = 1)
                 }
                 calcDate = received.getReturnDate();
 
@@ -140,8 +168,8 @@ public class ShellRunner {
             }
         }
         // 生成线下回款
-        ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "线下回款", true,
-        		destPath + "线下回款.xlsx");
+        ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "快捷通回款", true,
+        		destPath + "快捷通回款.xlsx");
     }
 
     private static void localGen() throws Exception {
@@ -171,4 +199,20 @@ public class ShellRunner {
         }
     }
 
+    
+
+	public static String genDateStr(String date) {
+		String[] dateArray = null;
+	    String year = "";
+	    if (date.contains(".")) {
+	    	dateArray = date.split("\\.");
+	    	if (dateArray.length != 2) {
+	    		System.out.println("date填写错误，请确认");
+	    	}
+	    	year = String.valueOf(DateUtil.thisYear());
+	    	
+	    }
+	    
+	    return year + "-" + dateArray[0] + "-" + dateArray[1];
+	}
 }
