@@ -23,13 +23,17 @@ public class UserInfo {
     //用户名
     @ExcelField(title = "序号", order = 1)
     private String id;
+    
+    @ExcelField(title = "门店名称", order = 1)
+    private String storeName;
+    @ExcelField(title = "姓名", order = 1)
+    private String name;
+    
     @ExcelField(title = "手机号", order = 1)
     private String phone;
     
     @ExcelField(title = "身份证号", order = 1)
-    private String id_no;
+    private String idNo;
     
-    @ExcelField(title = "姓名", order = 1)
-    private String name;
 
 }
