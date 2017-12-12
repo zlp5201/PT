@@ -4,6 +4,7 @@
 package com.zhangliping.puhui.bean;
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Data;
@@ -53,7 +54,7 @@ public class Loan {
     private String tiqianhuankuanbenjin;
 	//提前还款减免利息
     @ExcelField(title = "提前还款减免利息", order = 1)
-    private String tiqianhuankuanlixi;
+    private BigDecimal tiqianhuankuanlixi;
 	//总还款期数
     @ExcelField(title = "总还款期数", order = 1)
     private String jiekuanqixian;

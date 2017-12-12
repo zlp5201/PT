@@ -39,10 +39,6 @@ public class ShellRunner {
         List<DataInfo> userInfoList = ExcelUtils.getInstance().readExcel2Objects(output + fileName, DataInfo.class, 0, 0);
 
         Set keySet = new HashSet<String>();
-
-
-        List<String> roomList = Lists.newArrayList();
-
         for (DataInfo dataInfo : userInfoList) {
             if (keySet.contains(dataInfo.getRoomNo())) {
                 continue;

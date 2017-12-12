@@ -1,7 +1,9 @@
 package com.zhangliping.puhui.bean;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,13 +11,22 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.crab2died.ExcelUtils;
+import com.github.crab2died.handler.ExcelHeader;
 import com.github.crab2died.utils.DateUtils;
+import com.github.crab2died.utils.Utils;
 import com.google.common.collect.Lists;
 import com.xiaoleilu.hutool.util.DateUtil;
+import com.zhangliping.sqladmin.util.ExcelUtil;
+import com.zhangliping.sqladmin.util.ExcelUtilsExtend;
 import com.zhangliping.sqladmin.util.PropertiesUtils;
 
 /**
@@ -30,28 +41,26 @@ public class ShellRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(ShellRunner.class);
 
-    public static String date = PropertiesUtils.getValue("date");
-   ;
+    public static String date = PropertiesUtils.getValue("date");;
     public static Integer rowNum = Integer.valueOf(PropertiesUtils.getValue("rowNum"));
     public static String path = PropertiesUtils.getValue("path");
     public static String dateStr = genDateStr(date);
-    
+
     public static String destPath = path + date + "\\";
     public static String templeName = "temp.xlsx";
-    public static String fileName = "个人放款通知单"+ date + ".xlsx";
+    public static String fileName = "个人放款通知单" + date + ".xlsx";
     public static String pwName = "PW.xlsx";
     public static Date loadDate = DateUtils.str2Date(dateStr, "yyyy-M-d");
-    
+
     static {
-    
-    	File file = new File(destPath);
-    	if (!file.exists()) {
-			file.mkdirs();
-    	}
-    	
-    	 
+
+        File file = new File(destPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
     }
-    
+
     /**
      * @param args
      * @throws Exception
@@ -65,10 +74,10 @@ public class ShellRunner {
         loadGen(notifyList);
 
         // 线下回款
-        receiveGen(notifyList);
+        // receiveGen(notifyList);
 
         // 文件记录查找
-//        localGen();
+        // localGen();
         logger.info("完事....收工.....");
     }
 
@@ -84,11 +93,11 @@ public class ShellRunner {
             loan.setReturnTotal("");
             loan.setTiqianjianmianfuwufei("");
             loan.setTiqianhuankuanbenjin("");
-            loan.setTiqianhuankuanlixi("");
+            loan.setTiqianhuankuanlixi(BigDecimal.TEN);
             loanList.add(loan);
         }
         // 线下放款生成
-        ExcelUtils.getInstance().exportObjects2Excel(loanList, Loan.class, true, "快捷通", true, destPath + "快捷通放款.xlsx");
+        ExcelUtilsExtend.getInstance().exportObjects2Excel(loanList, Loan.class, true, "快捷通", true, destPath + "快捷通放款.xlsx");
     }
 
     private static void receiveGen(List<Notify> notifyList) throws Exception {
@@ -117,13 +126,13 @@ public class ShellRunner {
             received.setReturnDate(null);
             receivedList.add(received);
             Date calcDate = stu.getReturnStartDate();
-            
+
             // 先计算第二条记录
-            
+
             double fangkuan = Math.floor(Double.valueOf(stu.getTureTotal()) / 24.0);
             double lixi = Math.floor(Double.valueOf(stu.getTotallixi()) / 24.0);
             double service = Math.floor((tureTotal + serviceFee) / 24.0 - fangkuan);
-            
+
             double total = 0.0;
             for (int i = 0; i < Integer.valueOf(stu.getJiekuanqixian()); i++) {
                 received = new Received();
@@ -131,7 +140,7 @@ public class ShellRunner {
                 received.setBorrower(stu.getBorrower());
                 // 放款日期", order = 1)
                 received.setReturnStartDate(null);
-                
+
                 if (i == 0) {
                     // "服务费", order = 1)
                     received.setServiceFee(String.valueOf(serviceFee - service * 23));
@@ -149,7 +158,6 @@ public class ShellRunner {
                     calendar.setTime(calcDate);
                     calendar.add(calendar.MONTH, 1);
                     received.setReturnDate(calendar.getTime());
-                    
 
                     // "服务费", order = 1)
                     received.setServiceFee(String.valueOf(service));
@@ -169,7 +177,7 @@ public class ShellRunner {
         }
         // 生成线下回款
         ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "快捷通回款", true,
-        		destPath + "快捷通回款.xlsx");
+                destPath + "快捷通回款.xlsx");
     }
 
     private static void localGen() throws Exception {
@@ -194,25 +202,25 @@ public class ShellRunner {
                 }
             }
             // 位置生成
-            ExcelUtils.getInstance()
-            .exportObjects2Excel(genLocalList, ExcelLocal.class, true, "位置", true, destPath + "位置.xlsx");
+            ExcelUtils.getInstance().exportObjects2Excel(genLocalList, ExcelLocal.class, true, "位置", true,
+                    destPath + "位置.xlsx");
         }
     }
 
-    
+    public static String genDateStr(String date) {
+        String[] dateArray = null;
+        String year = "";
+        if (date.contains(".")) {
+            dateArray = date.split("\\.");
+            if (dateArray.length != 2) {
+                System.out.println("date填写错误，请确认");
+            }
+            year = String.valueOf(DateUtil.thisYear());
 
-	public static String genDateStr(String date) {
-		String[] dateArray = null;
-	    String year = "";
-	    if (date.contains(".")) {
-	    	dateArray = date.split("\\.");
-	    	if (dateArray.length != 2) {
-	    		System.out.println("date填写错误，请确认");
-	    	}
-	    	year = String.valueOf(DateUtil.thisYear());
-	    	
-	    }
-	    
-	    return year + "-" + dateArray[0] + "-" + dateArray[1];
-	}
+        }
+
+        return year + "-" + dateArray[0] + "-" + dateArray[1];
+    }
+
+
 }
