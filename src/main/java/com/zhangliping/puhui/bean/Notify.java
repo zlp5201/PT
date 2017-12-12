@@ -35,26 +35,26 @@ public class Notify {
     @ExcelField(title = "合同编号", order = 1)
     private String contractNo;
     @ExcelField(title = "借款金额", order = 1)
-    private String jiekuanjine;
+    private Double jiekuanjine;
     @ExcelField(title = "借款期限", order = 1)
-    private String jiekuanqixian;
+    private Integer jiekuanqixian;
     @ExcelField(title = "借款利率", order = 1)
-    private String jiekuanlilv;
+    private Double jiekuanlilv;
     @ExcelField(title = "还款开始日期", order = 1, readConverter = Notify2DateConverter.class)
     private Date returnStartDate;
     @ExcelField(title = "还款结束日期", order = 1, readConverter = Notify2DateConverter.class)
     private Date returnEndDate;
     @ExcelField(title = "服务费", order = 1)
-    private String serviceFee;
+    private Double serviceFee;
     @ExcelField(title = "实际打款金额", order = 1)
-    private String tureTotal;
+    private Double tureTotal;
     @ExcelField(title = "总利息", order = 1)
-    private String totallixi;
+    private Double totallixi;
     @ExcelField(title = "每期应收金额", order = 1)
-    private String meiqiyingshou;
+    private Double meiqiyingshou;
     
     @ExcelField(title = "首期还款金额", order = 1)
-    private String shouqihuankuan;
+    private Double shouqihuankuan;
     @ExcelField(title = "产品类型", order = 1)
     private String productType;
     

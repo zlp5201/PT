@@ -33,16 +33,19 @@ public class ExcelToSql {
      * @since [产品/模块版本](可选)
      */
     public static void main(String[] args) throws Exception {
-        String path = "D:\\new\\doc\\07.发布交付件\\01会员同步sql";
-        String deleteSqlTemplete = "delete from customer_data;";
-        String defaultSqlTemplete = "INSERT INTO customer_data (id,phone,id_no,name) values "
-                + "('%s','%s','%s','%s');";
-
-        List<UserInfo> userInfoList = ExcelUtils.getInstance().readExcel2Objects(fileFullPath, UserInfo.class, 0, 0);
-
-        String combomSql = genSqlSatement(deleteSqlTemplete, defaultSqlTemplete, userInfoList);
-        String fileName = "customer-reg-" + DateUtil.today() + ".sql";
-        FileUtil.writeUtf8String(combomSql, fileName);
+//        String path = "D:\\new\\doc\\07.发布交付件\\01会员同步sql";
+//        String deleteSqlTemplete = "delete from customer_data;";
+//        String defaultSqlTemplete = "INSERT INTO customer_data (id,phone,id_no,name) values "
+//                + "('%s','%s','%s','%s');";
+//
+//        List<UserInfo> userInfoList = ExcelUtils.getInstance().readExcel2Objects(fileFullPath, UserInfo.class, 0, 0);
+//
+//        String combomSql = genSqlSatement(deleteSqlTemplete, defaultSqlTemplete, userInfoList);
+//        String fileName = "customer-reg-" + DateUtil.today() + ".sql";
+//        FileUtil.writeUtf8String(combomSql, fileName);
+        
+        
+        
     }
     /**
      * 功能描述: 

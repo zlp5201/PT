@@ -33,31 +33,31 @@ public class Loan {
     private Date loadDate;
     
     @ExcelField(title = "签约金额", order = 1)
-    private String jiekuanjine;
+    private Double jiekuanjine;
     
     @ExcelField(title = "服务费", order = 1)
-    private String serviceFee;
+    private Double serviceFee;
 	//实际放款金额
     @ExcelField(title = "实际打款金额", order = 1)
-    private String tureTotal;
+    private Double tureTotal;
 	//应收利息
     @ExcelField(title = "应收利息", order = 1)
-    private String totallixi;
+    private Double totallixi;
 	//还款总额
-    @ExcelField(title = "还款总额", order = 1)
-    private String returnTotal;
+    @ExcelField(title = "还款总额", order = 1, writeConverter=Loan2DateConverter.class)
+    private Double returnTotal;
 	//提前还款减免服务费
-    @ExcelField(title = "提前还款减免本金", order = 1)
-    private String tiqianjianmianfuwufei;
+    @ExcelField(title = "提前还款减免本金", order = 1, writeConverter=Loan2DateConverter.class)
+    private Double tiqianjianmianfuwufei;
 	//提前还款减免本金
-    @ExcelField(title = "提前还款减免本金", order = 1)
-    private String tiqianhuankuanbenjin;
+    @ExcelField(title = "提前还款减免本金", order = 1, writeConverter=Loan2DateConverter.class)
+    private Double tiqianhuankuanbenjin;
 	//提前还款减免利息
-    @ExcelField(title = "提前还款减免利息", order = 1)
-    private BigDecimal tiqianhuankuanlixi;
+    @ExcelField(title = "提前还款减免利息", order = 1, writeConverter=Loan2DateConverter.class)
+    private Double tiqianhuankuanlixi;
 	//总还款期数
     @ExcelField(title = "总还款期数", order = 1)
-    private String jiekuanqixian;
+    private Integer jiekuanqixian;
 	//产品名称
     @ExcelField(title = "产品名称", order = 1)
     private String productType;

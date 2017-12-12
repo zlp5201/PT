@@ -90,95 +90,95 @@ public class ShellRunner {
             loan = new Loan();
             BeanUtils.copyProperties(loan, stu);
             loan.setLoadDate(loadDate);
-            loan.setReturnTotal("");
-            loan.setTiqianjianmianfuwufei("");
-            loan.setTiqianhuankuanbenjin("");
-            loan.setTiqianhuankuanlixi(BigDecimal.TEN);
+            loan.setReturnTotal(null);
+            loan.setTiqianjianmianfuwufei(null);
+            loan.setTiqianhuankuanbenjin(null);
+            loan.setTiqianhuankuanlixi(null);
             loanList.add(loan);
         }
         // 线下放款生成
         ExcelUtilsExtend.getInstance().exportObjects2Excel(loanList, Loan.class, true, "快捷通", true, destPath + "快捷通放款.xlsx");
     }
-
-    private static void receiveGen(List<Notify> notifyList) throws Exception {
-        logger.info("开始生成回款列表....");
-        List<Received> receivedList = Lists.newArrayList();
-        Received received = null;
-        for (Notify stu : notifyList) {
-            received = new Received();
-            received.setContractNo(stu.getContractNo());
-            received.setBorrower(stu.getBorrower());
-            // 放款日期", order = 1)
-            received.setReturnStartDate(loadDate);
-            // "服务费", order = 1)
-            received.setServiceFee(stu.getServiceFee());
-            // @ExcelField(title = "放款金额", order = 1)
-            received.setTureTotal(stu.getTureTotal());
-            // @ExcelField(title = "应收利息", order = 1)
-            received.setTotallixi(stu.getTotallixi());
-
-            // @ExcelField(title = "还款总额", order = 1)
-            double totallixi = Double.valueOf(received.getTotallixi());
-            double tureTotal = Double.valueOf(received.getTureTotal());
-            double serviceFee = Double.valueOf(stu.getServiceFee());
-            received.setReturnTotal(String.valueOf(totallixi + tureTotal + serviceFee));
-            // @ExcelField(title = "应还款日", order = 1)
-            received.setReturnDate(null);
-            receivedList.add(received);
-            Date calcDate = stu.getReturnStartDate();
-
-            // 先计算第二条记录
-
-            double fangkuan = Math.floor(Double.valueOf(stu.getTureTotal()) / 24.0);
-            double lixi = Math.floor(Double.valueOf(stu.getTotallixi()) / 24.0);
-            double service = Math.floor((tureTotal + serviceFee) / 24.0 - fangkuan);
-
-            double total = 0.0;
-            for (int i = 0; i < Integer.valueOf(stu.getJiekuanqixian()); i++) {
-                received = new Received();
-                received.setContractNo(stu.getContractNo());
-                received.setBorrower(stu.getBorrower());
-                // 放款日期", order = 1)
-                received.setReturnStartDate(null);
-
-                if (i == 0) {
-                    // "服务费", order = 1)
-                    received.setServiceFee(String.valueOf(serviceFee - service * 23));
-                    // @ExcelField(title = "放款金额", order = 1)
-                    received.setTureTotal(String.valueOf(tureTotal - fangkuan * 23));
-                    // @ExcelField(title = "应收利息", order = 1)
-                    received.setTotallixi(String.valueOf(totallixi - lixi * 23));
-                    // @ExcelField(title = "还款总额", order = 1)
-                    total = serviceFee - service * 23 + tureTotal - fangkuan * 23 + totallixi - lixi * 23;
-                    received.setReturnTotal(String.valueOf(total));
-                    // @ExcelField(title = "应还款日", order = 1)
-                    received.setReturnDate(stu.getReturnStartDate());
-                } else {
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(calcDate);
-                    calendar.add(calendar.MONTH, 1);
-                    received.setReturnDate(calendar.getTime());
-
-                    // "服务费", order = 1)
-                    received.setServiceFee(String.valueOf(service));
-                    // @ExcelField(title = "放款金额", order = 1)
-                    received.setTureTotal(String.valueOf(fangkuan));
-                    // @ExcelField(title = "应收利息", order = 1)
-                    received.setTotallixi(String.valueOf(lixi));
-                    // @ExcelField(title = "还款总额", order = 1)
-                    total = total + service + fangkuan + lixi;
-                    received.setReturnTotal(String.valueOf(total));
-                    // @ExcelField(title = "应还款日", order = 1)
-                }
-                calcDate = received.getReturnDate();
-
-                receivedList.add(received);
-            }
-        }
-        // 生成线下回款
-        ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "快捷通回款", true,
-                destPath + "快捷通回款.xlsx");
-    }
+//
+//    private static void receiveGen(List<Notify> notifyList) throws Exception {
+//        logger.info("开始生成回款列表....");
+//        List<Received> receivedList = Lists.newArrayList();
+//        Received received = null;
+//        for (Notify stu : notifyList) {
+//            received = new Received();
+//            received.setContractNo(stu.getContractNo());
+//            received.setBorrower(stu.getBorrower());
+//            // 放款日期", order = 1)
+//            received.setReturnStartDate(loadDate);
+//            // "服务费", order = 1)
+//            received.setServiceFee(stu.getServiceFee());
+//            // @ExcelField(title = "放款金额", order = 1)
+//            received.setTureTotal(stu.getTureTotal());
+//            // @ExcelField(title = "应收利息", order = 1)
+//            received.setTotallixi(stu.getTotallixi());
+//
+//            // @ExcelField(title = "还款总额", order = 1)
+//            double totallixi = Double.valueOf(received.getTotallixi());
+//            double tureTotal = Double.valueOf(received.getTureTotal());
+//            double serviceFee = Double.valueOf(stu.getServiceFee());
+//            received.setReturnTotal(String.valueOf(totallixi + tureTotal + serviceFee));
+//            // @ExcelField(title = "应还款日", order = 1)
+//            received.setReturnDate(null);
+//            receivedList.add(received);
+//            Date calcDate = stu.getReturnStartDate();
+//
+//            // 先计算第二条记录
+//
+//            double fangkuan = Math.floor(Double.valueOf(stu.getTureTotal()) / 24.0);
+//            double lixi = Math.floor(Double.valueOf(stu.getTotallixi()) / 24.0);
+//            double service = Math.floor((tureTotal + serviceFee) / 24.0 - fangkuan);
+//
+//            double total = 0.0;
+//            for (int i = 0; i < Integer.valueOf(stu.getJiekuanqixian()); i++) {
+//                received = new Received();
+//                received.setContractNo(stu.getContractNo());
+//                received.setBorrower(stu.getBorrower());
+//                // 放款日期", order = 1)
+//                received.setReturnStartDate(null);
+//
+//                if (i == 0) {
+//                    // "服务费", order = 1)
+//                    received.setServiceFee(String.valueOf(serviceFee - service * 23));
+//                    // @ExcelField(title = "放款金额", order = 1)
+//                    received.setTureTotal(String.valueOf(tureTotal - fangkuan * 23));
+//                    // @ExcelField(title = "应收利息", order = 1)
+//                    received.setTotallixi(String.valueOf(totallixi - lixi * 23));
+//                    // @ExcelField(title = "还款总额", order = 1)
+//                    total = serviceFee - service * 23 + tureTotal - fangkuan * 23 + totallixi - lixi * 23;
+//                    received.setReturnTotal(String.valueOf(total));
+//                    // @ExcelField(title = "应还款日", order = 1)
+//                    received.setReturnDate(stu.getReturnStartDate());
+//                } else {
+//                    Calendar calendar = new GregorianCalendar();
+//                    calendar.setTime(calcDate);
+//                    calendar.add(calendar.MONTH, 1);
+//                    received.setReturnDate(calendar.getTime());
+//
+//                    // "服务费", order = 1)
+//                    received.setServiceFee(String.valueOf(service));
+//                    // @ExcelField(title = "放款金额", order = 1)
+//                    received.setTureTotal(String.valueOf(fangkuan));
+//                    // @ExcelField(title = "应收利息", order = 1)
+//                    received.setTotallixi(String.valueOf(lixi));
+//                    // @ExcelField(title = "还款总额", order = 1)
+//                    total = total + service + fangkuan + lixi;
+//                    received.setReturnTotal(String.valueOf(total));
+//                    // @ExcelField(title = "应还款日", order = 1)
+//                }
+//                calcDate = received.getReturnDate();
+//
+//                receivedList.add(received);
+//            }
+//        }
+//        // 生成线下回款
+//        ExcelUtils.getInstance().exportObjects2Excel(receivedList, Received.class, true, "快捷通回款", true,
+//                destPath + "快捷通回款.xlsx");
+//    }
 
     private static void localGen() throws Exception {
         logger.info("开始生成位置查找列表....");

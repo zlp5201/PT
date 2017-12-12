@@ -159,24 +159,4 @@ public class ExcelUtil {
         }
         return result;
     }
-
-    public static void writeToXls(List resultList, String sheetName, String fileName) throws Exception {
-        // 创建一个EXCEL
-        Workbook wb = new HSSFWorkbook();
-        // 创建一个SHEET
-        Sheet sheet1 = wb.createSheet(sheetName);
-        if (resultList != null) {
-            for (int i = 0; i < resultList.size(); i++) {
-                // 创建一行
-                Row row = sheet1.createRow(i);
-                Loan rowList = (Loan) resultList.get(i);
-                    Cell cell = row.createCell(i);
-                    String cellLiString = (String) rowList.getJiekuanjine();
-                    cell.setCellValue(cellLiString);
-            }
-        }
-        FileOutputStream fileOut = new FileOutputStream(fileName);
-        wb.write(fileOut);
-        fileOut.close();
-    }
 }
