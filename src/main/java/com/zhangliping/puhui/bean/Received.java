@@ -20,11 +20,11 @@ public class Received {
     @ExcelField(title = "放款日期", order = 1, writeConverter = Received2DateConverter.class)
     private Date returnStartDate;
     @ExcelField(title = "服务费", order = 1)
-    private String serviceFee;
+    private Double serviceFee;
     @ExcelField(title = "放款金额", order = 1)
-    private String tureTotal;
+    private Double tureTotal;
     @ExcelField(title = "应收利息", order = 1)
-    private String totallixi;
+    private Double totallixi;
     @ExcelField(title = "还款总额", order = 1)
     private String returnTotal;
     @ExcelField(title = "应还款日", order = 1, writeConverter = Received2DateConverter.class)

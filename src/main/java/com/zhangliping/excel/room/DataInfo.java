@@ -25,4 +25,14 @@ public class DataInfo {
     
     @ExcelField(title = "手机号", order = 1)
     private String phone;
+
+	public DataInfo(String roomNo, String phone) {
+		super();
+		this.roomNo = roomNo;
+		this.phone = phone;
+	}
+
+	public DataInfo() {
+		super();
+	}
 }
